@@ -69,3 +69,5 @@ Here is the full table:
 | Registering a request for reinstallation of sensors and system testing                      | Operators register a request for reinstallation of sensors and system testing.                   | Request registered.                                                                                                                                | Monitoring and completion of the incident.                              |
 
 ![Alert center diagramm](/img/Alert_center_diagramm.jpg)
+
+[Link to comment Alert center diagramm](https://miro.com/welcomeonboard/dFZEK1lvdzVDNjhydlppb2JhakZXbnhkK05XQVI5d0YwRHF4M0cyd0hObjVnb0pMRnZXMnU5K2k1OCtuckJTWXo3RHgwMmxnZ01VUlBUaTlSam1DcVFscjZ6MkhJcTdVbkVZdC9HMmRSRG9JdFBOTUo3MnZtVjl2WThUVmhEWC8hZQ==?share_link_id=99174274404)
