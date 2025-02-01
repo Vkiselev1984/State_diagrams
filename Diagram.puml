@@ -1,0 +1,85 @@
+@startuml
+title  Operator-assisted fire detection system states
+scale 2400 width
+
+[*] --> WaitingToReceiveSystemOperatorRole
+
+WaitingToReceiveSystemOperatorRole --> ObtainingAccessToTheSystem: Passing the test
+
+state ObtainingAccessToTheSystem {
+    ObtainingAccessToTheSystem --> CheckingUserAccessRights: User authorization
+    CheckingUserAccessRights --> SuccessfulLogin: Login
+    CheckingUserAccessRights --> LoginError: Login error
+}
+
+state SuccessfulLogin {
+    SuccessfulLogin --> SystemMonitoring: Enter system
+}
+
+state LoginError {
+    LoginError --> RegistrationRequestToTechnicalService: Registration of a request to the technical service department
+}
+
+state SystemMonitoring {
+    SystemMonitoring --> ReceivingFireAlert: The sensor sends a fire alert
+    ReceivingFireAlert --> CheckingSignal: Data registration
+    SystemMonitoring --> ManualOverride: Manual override by operator
+}
+
+state CheckingSignal {
+    CheckingSignal --> FireHazardConfirmation: Control values match
+    CheckingSignal --> AlternativeMethods: Control values do not match
+}
+
+state AlternativeMethods {
+    AlternativeMethods --> RegistrationRequestToTechnicalService: Fire alarm signal not confirmed
+    AlternativeMethods --> FireHazardConfirmation: Fire alarm confirmed
+}
+
+state FireHazardConfirmation {
+    FireHazardConfirmation --> AbilityToCope: Domestic smoke or fire
+    FireHazardConfirmation --> InabilityToCope: Domestic smoke or fire
+}
+
+state AbilityToCope {
+    AbilityToCope --> RegisteringCompletedIncident: Smoke or fire has been eliminated
+    RegisteringCompletedIncident --> IncidentReview: Review of incident response
+}
+
+state InabilityToCope {
+    InabilityToCope --> NotifyFireSafetyService: Notification of users
+    NotifyFireSafetyService --> ConfirmationByFireSafetyService: Confirmation of the incident by the Fire Safety Service
+    ConfirmationByFireSafetyService --> RegisteringCompletedIncident: Receiving confirmation from the Fire Safety Authority
+}
+
+state OperatorActions {
+    CheckingSignal --> OperatorChecksSignal: Operator checks the signal
+    OperatorChecksSignal --> OperatorSendsRequest: Operator sends a request to technical support
+    OperatorSendsRequest --> OperatorCallsOwner: Operator calls the building owner
+    OperatorCallsOwner --> InformingUsers: Operator informs users
+}
+
+state TechnicalSupport {
+    OperatorSendsRequest --> WaitingForResponse: Waiting for response from technical support
+    WaitingForResponse --> TechnicalSupportResponse: Technical support provides assistance
+    TechnicalSupportResponse --> OperatorActions: Operator resumes actions
+    TechnicalSupportResponse --> Escalation: Escalation to higher-level support
+}
+
+state Escalation {
+    Escalation --> HigherLevelSupport: Engaging higher-level technical support
+    HigherLevelSupport --> TechnicalSupportResponse: Response from higher-level support
+}
+
+state FireSafetyService {
+    NotifyFireSafetyService --> FireSafetyServiceResponse: Fire Safety Service responds
+    FireSafetyServiceResponse --> OperatorActions: Operator receives confirmation
+    FireSafetyServiceResponse --> IncidentInvestigation: Investigation of the incident
+}
+
+state IncidentInvestigation {
+    IncidentInvestigation --> ReviewFindings: Review findings of the investigation
+    ReviewFindings --> FinalReport: Generate final report
+}
+
+@enduml
